@@ -25,6 +25,7 @@
 							<th>Last Name</th>
 							<th>Email</th>
 							<th>Update</th>
+							<th>Delete</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -35,6 +36,10 @@
 							<td>
 								<a th:href="@{/employees/showFormForUpdate(employeeId=${employee.id})}" 
 									class="btn btn-warning btn-sm" >Update</a>
+							</td>
+							<td>
+								<a th:href="@{/employees/deleteById(employeeId=${employee.id})}" 
+									class="confirm-delete btn btn-danger btn-sm">Delete</a>
 							</td>
 						</tr>
 					</tbody>
