@@ -40,14 +40,6 @@ public class EmployeeController {
 		return "employees/employee-form";
 	}
 	
-	// @GetMapping - showFormForUpdate
-	@GetMapping("/showFormForUpdate")
-	public String showFormForUpdate(@RequestParam("employeeId") int id, Model model) {
-		model.addAttribute("employee", employeeService.findById(id));
-		
-		return "employees/employee-form";
-	}
-	
 	// @PostMapping - save - Create AND Update
 	@PostMapping("/save")
 	public String save(@ModelAttribute("employee") Employee employee) {
@@ -56,6 +48,16 @@ public class EmployeeController {
 		return "redirect:/employees/index";
 	}
 	
+	// @GetMapping - showFormForUpdate
+	@GetMapping("/showFormForUpdate")
+	public String showFormForUpdate(@RequestParam("employeeId") int id, Model model) {
+		Employee employee = employeeService.findById(id);
+		
+		model.addAttribute("employee", employee);
+		
+		return "employees/employee-form";
+	}
+
 	// @GetMapping - deleteById
 	
 	

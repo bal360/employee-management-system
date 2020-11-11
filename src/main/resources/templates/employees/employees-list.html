@@ -33,7 +33,7 @@
 							<td th:text="${employee.lastName}" />
 							<td th:text="${employee.email}" />
 							<td>
-								<a href="@{/employees/showFormForUpdate(employeeId=${employee.id})}" 
+								<a th:href="@{/employees/showFormForUpdate(employeeId=${employee.id})}" 
 									class="btn btn-warning btn-sm" >Update</a>
 							</td>
 						</tr>
