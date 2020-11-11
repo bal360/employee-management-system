@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.blakelong.employeemanagementsystem.dao.EmployeeRepository;
 import com.blakelong.employeemanagementsystem.entity.Employee;
 
+@Repository
 public class EmployeeServiceImpl implements EmployeeService {
 	
 	@Autowired
@@ -42,4 +44,5 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public void deleteById(int id) {
 		employeeRepository.deleteById(id);
 	}
+	
 }
