@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.blakelong.employeemanagementsystem.entity.Employee;
 import com.blakelong.employeemanagementsystem.service.EmployeeService;
@@ -35,6 +36,14 @@ public class EmployeeController {
 	@GetMapping("/showFormForAdd")
 	public String showFormForAdd(Model model) {
 		model.addAttribute("employee", new Employee());
+		
+		return "employees/employee-form";
+	}
+	
+	// @GetMapping - showFormForUpdate
+	@GetMapping("/showFormForUpdate")
+	public String showFormForUpdate(@RequestParam("employeeId") int id, Model model) {
+		model.addAttribute("employee", employeeService.findById(id));
 		
 		return "employees/employee-form";
 	}
