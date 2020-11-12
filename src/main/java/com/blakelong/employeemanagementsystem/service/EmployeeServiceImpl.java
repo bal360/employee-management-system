@@ -65,27 +65,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 //	};
 	
 	@Override
-	public Page<Employee> findByName(String name, Pageable pageable) {
+	public Page<Employee> findByName(Optional<String> name, Pageable pageable) {
 		return employeeRepository.findByName(name, pageable);
-		
-//		
-//		Query<Employee> theQuery = null;
-//		
-//		if (theSearchName != null && theSearchName.trim().length() > 0) {
-//			// search for firstName or lastName - case insensitive
-//			theQuery = (Query<Employee>) entityManager.createQuery("from Employee WHERE lower(firstName) LIKE :theName OR lower(lastName) LIKE :theName", Employee.class);
-//			theQuery.setParameter("theName", "%" + theSearchName.toLowerCase() + "%");
-//		} else {
-//			// theSearchName is empty so just get all customers
-//			theQuery = (Query<Employee>) entityManager.createQuery("from Employee ORDER BY lastName", Employee.class);
-//		}
-//		
-//		// execute query and get result list
-//		Page<Employee> employees = (Page<Employee>)(List<Employee>) theQuery.getResultList();
-		
-		//return results
-//		return employees;
-		
 	}
 	
 }

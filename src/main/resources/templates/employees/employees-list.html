@@ -18,7 +18,7 @@
 			<div class="row">
 				<a th:href="@{/employees/showFormForAdd}" class="btn btn-primary mb-3 ml-3">Add Employee</a>
 				
-				<form action="#" th:action="@{/employees/search}" method="POST" class="col text-right mt-1">
+				<form action="#" th:action="@{/employees/index}" method="GET" class="col text-right mt-1">
 					<input type="text" placeholder="Search" name="theSearchName"/>
 					<input type="submit" class="btn btn-sm" style="color: white; background: grey" />
 				</form>
@@ -55,15 +55,15 @@
 				
 			<nav aria-label="...">
 				<ul class="pagination justify-content-center">
-					<li class="page-item">
+					<!-- <li class="page-item">
 					    <span th:if="${page.hasPrevious()}">
 					        <a class="page-link" th:href="@{/employees/index(page=${page.number-1},size=${page.size})}" >
 					        	<span aria-hidden="true">&laquo</span>
 					        </a>
 					    </span>
-				    </li>
+				    </li> -->
 				    
-				    <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+				    <th:block th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}">
 			        	<li class="page-item active">
 					        <span class="page-link active" aria-current="page" th:if="${page.number == i}" th:text="${i+1}">
 					        </span>
@@ -75,13 +75,13 @@
 				        </span>
 				    </th:block>
 				    
-				    <li class="page-item">
+				    <!-- <li class="page-item">
 					    <span th:if="${page.hasNext()}">
 					        <a class="page-link" th:href="@{/employees/index(page=${page.number+1},size=${page.size})}">
 					        	<span aria-hidden="true">&raquo</span>
 					        </a>
 					    </span>
-				    </li>
+				    </li> -->
 			    </ul>
 		    </nav>
 			

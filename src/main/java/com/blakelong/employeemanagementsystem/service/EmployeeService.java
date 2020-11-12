@@ -1,6 +1,6 @@
 package com.blakelong.employeemanagementsystem.service;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +19,6 @@ public interface EmployeeService {
 	
 //	public Page<Employee> findByLastNameOrFirstName(String name, Pageable pageable);
 	
-	public Page<Employee> findByName(String name, Pageable pageable);
+	public Page<Employee> findByName(Optional<String> name, Pageable pageable);
 	
 }

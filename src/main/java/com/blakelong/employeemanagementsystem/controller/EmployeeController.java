@@ -1,6 +1,7 @@
 package com.blakelong.employeemanagementsystem.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -33,14 +34,17 @@ public class EmployeeController {
 	// @GetMapping - list employees
 	@GetMapping("/index")
 	public String findAll(@PageableDefault(size = 6) Pageable pageable, Model model) {
-
-		Page<Employee> page = employeeService.findAll(pageable);
+//		if (name.isEmpty()) {
+			Page<Employee> page = employeeService.findAll(pageable);
+			model.addAttribute("page", page);
+//			System.out.println("================>>>>>>> pageObject: " + page.getContent());
+//		} else {
+//			Page<Employee> page = employeeService.findByName(name, pageable);
+//			model.addAttribute("page", page);
+//		}
 		
-//		Page<Employee> page = employeeRepository.findAll(pageable);
 
-		model.addAttribute("page", page);
-		
-//		model.addAttribute("employees", employees);
+//			@RequestParam("theSearchName") Optional<String> name
 		
 		return "employees/employees-list";
 	}
@@ -81,17 +85,17 @@ public class EmployeeController {
 	}
 	
 	// @PostMapping - search
-	@PostMapping("/search")
-	public String search(@RequestParam("theSearchName") String string, Model model, @PageableDefault(size = 6) Pageable pageable) {
-		
-		Page<Employee> employees = employeeService.findByName(string, pageable);
-
-		model.addAttribute("page", employees);
-
-		System.out.println("==========>>>>>>>>=======>>>>> Running fine here");
-		
-		return "employees/employees-list";
-	}
+//	@PostMapping("/search")
+//	public String search(@RequestParam("theSearchName") String string, Model model, @PageableDefault(size = 6) Pageable pageable) {
+//		
+//		Page<Employee> employees = employeeService.findByName(string, pageable);
+//
+//		model.addAttribute("page", employees);
+//
+//		System.out.println("==========>>>>>>>>=======>>>>> Running fine here");
+//		
+//		return "employees/employees-list";
+//	}
 	
 	
 	
