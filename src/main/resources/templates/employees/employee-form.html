@@ -11,27 +11,33 @@
 		<title>Employee Form</title>
 	</head>
 	<body>
-		<h1>Employee Repository</h1>
-		<hr>
-		
-		<form action="#" th:action="@{/employees/save}" method="POST" th:object="${employee}">
+		<div class="container">
+			<div class="row justify-content-center">
+				<h1>Employee Repository</h1>
+			</div>
+			<hr>
 			
-			<input type="hidden" id="hidden" th:field="${employee.id}" >
-			
-			<label for="firstName">First Name</label>
-			<input type="text" class="form-control col-3 mb-4" id="firstName" th:field="*{firstName}">
-			
-			<label for="lastName">Last Name</label>
-			<input type="text" class="form-control col-3 mb-4" id="lastName" th:field="*{lastName}" >
-			
-			<label for="email">Email</label>
-			<input type="text" class="form-control col-3 mb-4" id="email" th:field="*{email}">
-			
-			<button type="submit" class="btn btn-info mb-4">Save</button>
-			
-		</form>
-	
-		<a th:href="@{/employees/index}">Back to Employee Table</a>		
-		
+			<div class="row justify-content-center form-group">	
+				<form action="#" th:action="@{/employees/save}" method="POST" th:object="${employee}">
+					
+					<input type="hidden" id="hidden" th:field="${employee.id}" >
+					
+					<label for="firstName">First Name</label>
+					<input type="text" class="form-control mb-4" id="firstName" th:field="*{firstName}">
+					
+					<label for="lastName">Last Name</label>
+					<input type="text" class="form-control mb-4" id="lastName" th:field="*{lastName}" >
+					
+					<label for="email">Email</label>
+					<input type="text" class="form-control mb-4" id="email" th:field="*{email}">
+					
+					<button type="submit" class="btn btn-info mb-4">Save</button>
+					
+				</form>
+			</div>
+			<div class="row justify-content-center">
+				<a th:href="@{/employees/index}">Back to Employee Table</a>		
+			</div>
+		</div>	
 	</body>
 </html>

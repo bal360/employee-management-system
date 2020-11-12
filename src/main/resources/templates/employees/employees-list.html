@@ -12,10 +12,17 @@
 	<body>
 		<div class="container">
 			
-			<h1>Employee Repository</h1>
+			<h1 class="text-center">Employee Repository</h1>
 			<hr>
 			
-			<a th:href="@{/employees/showFormForAdd}" class="btn btn-primary mb-3">Add Employee</a>
+			<div class="row">
+				<a th:href="@{/employees/showFormForAdd}" class="btn btn-primary mb-3 ml-3">Add Employee</a>
+				
+				<form action="#" th:action="@{/employees/search}" method="POST" class="col text-right mt-1">
+					<input type="text" placeholder="Search" th:object="${employee}"/>
+					<input type="submit" class="btn btn-sm" style="color: white; background: grey" />
+				</form>
+			</div>
 			
 			<div class="table-responsive border mb-3">
 				<table class="table table-striped">
@@ -47,7 +54,7 @@
 			</div>
 				
 			<nav aria-label="...">
-				<ul class="pagination pagination-lg justify-content-center">
+				<ul class="pagination justify-content-center">
 					<li class="page-item">
 					    <span th:if="${page.hasPrevious()}">
 					        <a class="page-link" th:href="@{/employees/index(page=${page.number-1},size=${page.size})}" >
@@ -81,26 +88,3 @@
 		</div>
 	</body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
