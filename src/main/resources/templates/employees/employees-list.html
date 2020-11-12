@@ -17,7 +17,7 @@
 			
 			<a th:href="@{/employees/showFormForAdd}" class="btn btn-primary mb-3">Add Employee</a>
 			
-			<div class="table-responsive">
+			<div class="table-responsive border mb-3">
 				<table class="table table-striped">
 					<thead class="thead-dark">
 						<tr>
@@ -44,34 +44,38 @@
 						</tr>
 					</tbody>
 				</table>
-				
 			</div>
 				
-				<nav aria-label="navigation">
-					<ul class="pagination pagination-sm justify-content-center">
-						<li class="page-item">
-						    <span th:if="${page.hasPrevious()}">
-						        <a class="page-link" th:href="@{/employees/index(page=${page.number-1},size=${page.size})}" >Previous</a>
-						    </span>
-					    </li>
-					    <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
-				        	<li class="page-item">
-						        <span class="page-link" th:if="${page.number == i}">[[${i}+1]]</span>
-						        <span th:unless="${page.number == i}">
-							             <a class="page-link" th:href="@{/employees/index(page=${i},size=${page.size})}">[[${i}+1]]</a>
-						        </span>
-				             </li>
-					    </th:block>
-					    <li class="page-item">
-						    <span th:if="${page.hasNext()}">
-						        <a class="page-link" th:href="@{/employees/index(page=${page.number+1},size=${page.size})}">Next</a>
-						    </span>
-					    </li>
-				    </ul>
-			    </nav>
-				
-				
-				
+			<nav aria-label="...">
+				<ul class="pagination pagination-lg justify-content-center">
+					<li class="page-item">
+					    <span th:if="${page.hasPrevious()}">
+					        <a class="page-link" th:href="@{/employees/index(page=${page.number-1},size=${page.size})}" >
+					        	<span aria-hidden="true">&laquo</span>
+					        </a>
+					    </span>
+				    </li>
+				    <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+			        	<li class="page-item active">
+					        <span class="page-link active" aria-current="page" th:if="${page.number == i}">
+						        [[${i}+1]]
+					        </span>
+			             </li>
+				        <span th:unless="${page.number == i}">
+				             <a class="page-link" aria-current="page" th:href="@{/employees/index(page=${i},size=${page.size})}">
+				             	[[${i}+1]]
+				             </a>
+				        </span>
+				    </th:block>
+				    <li class="page-item">
+					    <span th:if="${page.hasNext()}">
+					        <a class="page-link" th:href="@{/employees/index(page=${page.number+1},size=${page.size})}">
+					        	<span aria-hidden="true">&raquo</span>
+					        </a>
+					    </span>
+				    </li>
+			    </ul>
+		    </nav>
 			
 		</div>
 	</body>

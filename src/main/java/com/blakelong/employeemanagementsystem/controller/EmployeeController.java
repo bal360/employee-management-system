@@ -33,14 +33,10 @@ public class EmployeeController {
 
 		Page<Employee> page = employeeService.findAll(pageable);
 		
-		
-		
 //		Page<Employee> page = employeeRepository.findAll(pageable);
 
 		model.addAttribute("page", page);
 		
-		
-//		
 //		model.addAttribute("employees", employees);
 		
 		return "employees/employees-list";
