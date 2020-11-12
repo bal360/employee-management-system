@@ -29,7 +29,7 @@ public class EmployeeController {
 	
 	// @GetMapping - list employees
 	@GetMapping("/index")
-	public String findAll(@PageableDefault(size = 10) Pageable pageable, Model model) {
+	public String findAll(@PageableDefault(size = 6) Pageable pageable, Model model) {
 
 		Page<Employee> page = employeeService.findAll(pageable);
 		
