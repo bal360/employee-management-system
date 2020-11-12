@@ -19,4 +19,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 //	public List<Employee> findAllByOrderByLastNameAsc();
 	
 	public Page<Employee> findAll(Pageable pageable);
+	
+	public Page<Employee> findByLastnameOrFirstname(String name);
 }
