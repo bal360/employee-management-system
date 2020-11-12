@@ -48,12 +48,12 @@
 			</div>
 				
 				<nav aria-label="navigation">
-					<ul class="pagination">
-						    <span th:if="${page.hasPrevious()}">
+					<ul class="pagination pagination-sm justify-content-center">
 						<li class="page-item">
+						    <span th:if="${page.hasPrevious()}">
 						        <a class="page-link" th:href="@{/employees/index(page=${page.number-1},size=${page.size})}" >Previous</a>
-					    </li>
 						    </span>
+					    </li>
 					    <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
 				        	<li class="page-item">
 						        <span class="page-link" th:if="${page.number == i}">[[${i}+1]]</span>
@@ -62,11 +62,11 @@
 						        </span>
 				             </li>
 					    </th:block>
-						    <span th:if="${page.hasNext()}">
 					    <li class="page-item">
+						    <span th:if="${page.hasNext()}">
 						        <a class="page-link" th:href="@{/employees/index(page=${page.number+1},size=${page.size})}">Next</a>
-					    </li>
 						    </span>
+					    </li>
 				    </ul>
 			    </nav>
 				
