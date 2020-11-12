@@ -1,10 +1,9 @@
 package com.blakelong.employeemanagementsystem.dao;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.blakelong.employeemanagementsystem.entity.Employee;
 
@@ -20,5 +19,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	
 	public Page<Employee> findAll(Pageable pageable);
 	
-	public Page<Employee> findByLastnameOrFirstname(String name);
+	@Query("SELECT e FROM Employee e WHERE lower(firstName) LIKE %?1% OR lower(lastName) LIKE %?1%")
+	public Page<Employee> findByName(String name, Pageable pageable);
+	
+//	public Page<Employee> findByLastNameOrFirstName(String string, Pageable pageable);
 }

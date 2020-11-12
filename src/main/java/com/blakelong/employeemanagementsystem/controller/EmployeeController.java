@@ -1,5 +1,7 @@
 package com.blakelong.employeemanagementsystem.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.blakelong.employeemanagementsystem.dao.EmployeeRepository;
 import com.blakelong.employeemanagementsystem.entity.Employee;
 import com.blakelong.employeemanagementsystem.service.EmployeeService;
 
@@ -21,11 +22,13 @@ import com.blakelong.employeemanagementsystem.service.EmployeeService;
 public class EmployeeController {
 
 	// inject EmployeeService
-	@Autowired
 	EmployeeService employeeService;
-	
+
 	@Autowired
-	EmployeeRepository employeeRepository;
+	public EmployeeController(EmployeeService employeeService) {
+		this.employeeService = employeeService;
+	}
+	
 	
 	// @GetMapping - list employees
 	@GetMapping("/index")
@@ -79,8 +82,13 @@ public class EmployeeController {
 	
 	// @PostMapping - search
 	@PostMapping("/search")
-	public String search(@ModelAttribute("employee") Employee employee, Model model) {
+	public String search(@RequestParam("theSearchName") String string, Model model, @PageableDefault(size = 6) Pageable pageable) {
 		
+		Page<Employee> employees = employeeService.findByName(string, pageable);
+
+		model.addAttribute("page", employees);
+
+		System.out.println("==========>>>>>>>>=======>>>>> Running fine here");
 		
 		return "employees/employees-list";
 	}

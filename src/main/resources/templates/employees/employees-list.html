@@ -19,7 +19,7 @@
 				<a th:href="@{/employees/showFormForAdd}" class="btn btn-primary mb-3 ml-3">Add Employee</a>
 				
 				<form action="#" th:action="@{/employees/search}" method="POST" class="col text-right mt-1">
-					<input type="text" placeholder="Search" th:object="${employee}"/>
+					<input type="text" placeholder="Search" name="theSearchName"/>
 					<input type="submit" class="btn btn-sm" style="color: white; background: grey" />
 				</form>
 			</div>
@@ -36,7 +36,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="employee : ${page.content}">
+						<tr th:each="employee : ${page}">
 							<td th:text="${employee.firstName}" />
 							<td th:text="${employee.lastName}" />
 							<td th:text="${employee.email}" />
