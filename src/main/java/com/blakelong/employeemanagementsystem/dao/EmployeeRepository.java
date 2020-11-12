@@ -2,6 +2,8 @@ package com.blakelong.employeemanagementsystem.dao;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.blakelong.employeemanagementsystem.entity.Employee;
@@ -14,5 +16,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 		// deleteById(int id)
 	
 	// *** query/sort methods to come ***
-	public List<Employee> findAllByOrderByLastNameAsc();
+//	public List<Employee> findAllByOrderByLastNameAsc();
+	
+	public Page<Employee> findAll(Pageable pageable);
 }

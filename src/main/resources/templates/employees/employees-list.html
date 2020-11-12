@@ -29,7 +29,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="employee : ${employees}">
+						<tr th:each="employee : ${page.content}">
 							<td th:text="${employee.firstName}" />
 							<td th:text="${employee.lastName}" />
 							<td th:text="${employee.email}" />
@@ -44,8 +44,50 @@
 						</tr>
 					</tbody>
 				</table>
+				
 			</div>
+				
+				<div class="pagination-div">
+				    <span th:if="${page.hasPrevious()}">
+				        <a th:href="@{/employees/index(page=${page.number-1},size=${page.size})}">Previous</a>
+				    </span>
+				    <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+				        <span th:if="${page.number == i}" class="selected">[[${i}+1]]</span>
+				        <span th:unless="${page.number == i}">
+				             <a th:href="@{/employees/index(page=${i},size=${page.size})}">[[${i}+1]]</a>
+				        </span>
+				    </th:block>
+				    <span th:if="${page.hasNext()}">
+				        <a th:href="@{/employees/index(page=${page.number+1},size=${page.size})}">Next</a>
+				    </span>
+			    </div>
+				
+				
+				
 			
 		</div>
 	</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

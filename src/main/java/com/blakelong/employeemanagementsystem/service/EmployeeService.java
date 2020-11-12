@@ -1,12 +1,13 @@
 package com.blakelong.employeemanagementsystem.service;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.blakelong.employeemanagementsystem.entity.Employee;
 
 public interface EmployeeService {
 	
-	public List<Employee> findAll();
+	public Page<Employee> findAll(Pageable pageable);
 	
 	public Employee findById(int id);
 	

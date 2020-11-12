@@ -1,9 +1,10 @@
 package com.blakelong.employeemanagementsystem.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import com.blakelong.employeemanagementsystem.dao.EmployeeRepository;
@@ -16,8 +17,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	EmployeeRepository employeeRepository;
 	
 	@Override
-	public List<Employee> findAll() {
-		return employeeRepository.findAllByOrderByLastNameAsc();
+	public Page<Employee> findAll(Pageable pageable) {
+		return employeeRepository.findAll(pageable);
 	}
 	
 	@Override
