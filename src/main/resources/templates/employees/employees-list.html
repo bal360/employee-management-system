@@ -55,18 +55,19 @@
 					        </a>
 					    </span>
 				    </li>
+				    
 				    <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
 			        	<li class="page-item active">
-					        <span class="page-link active" aria-current="page" th:if="${page.number == i}">
-						        [[${i}+1]]
+					        <span class="page-link active" aria-current="page" th:if="${page.number == i}" th:text="${i+1}">
 					        </span>
 			             </li>
 				        <span th:unless="${page.number == i}">
-				             <a class="page-link" aria-current="page" th:href="@{/employees/index(page=${i},size=${page.size})}">
-				             	[[${i}+1]]
+				             <a class="page-link" 
+				             	th:href="@{/employees/index(page=${i},size=${page.size})}" th:text="${i+1}">
 				             </a>
 				        </span>
 				    </th:block>
+				    
 				    <li class="page-item">
 					    <span th:if="${page.hasNext()}">
 					        <a class="page-link" th:href="@{/employees/index(page=${page.number+1},size=${page.size})}">
