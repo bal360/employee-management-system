@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,20 +34,25 @@ public class EmployeeController {
 	
 	// @GetMapping - list employees
 	@GetMapping("/index")
-	public String findAll(@PageableDefault(size = 6) Pageable pageable, Model model) {
-
+	public String findAll(Model model) {
+		return listByPage(model, 1);
+	}
+	
+	@GetMapping("index/page/{pageNumber}")
+	public String listByPage(Model model, @PathVariable("pageNumber") int currentPage) {
+		// get page object
+		Page<Employee> page = employeeService.findAll(currentPage);
+		// get total # of employees
+		long totalEmployees = page.getTotalElements();
+		// get total # of pages
+		int totalPages = page.getTotalPages();
+	
+		// List<Employee> listEmployees = page.getContent();
 		
-//		if (name.isEmpty()) {
-			Page<Employee> page = employeeService.findAll(pageable);
-			model.addAttribute("page", page);
-//			System.out.println("================>>>>>>> pageObject: " + page.getContent());
-//		} else {
-//			Page<Employee> page = employeeService.findByName(name, pageable);
-//			model.addAttribute("page", page);
-//		}
-		
-
-//			@RequestParam("theSearchName") Optional<String> name
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("totalEmployees", totalEmployees);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("page", page);
 		
 		return "employees/employees-list";
 	}
@@ -86,18 +92,18 @@ public class EmployeeController {
 		return "redirect:/employees/index";
 	}
 	
-	// @PostMapping - search
-	@GetMapping("/search")
-	public String search(@RequestParam("theSearchName") Optional<String> string, Model model, @PageableDefault(size = 6) Pageable pageable) {
-		
-		Page<Employee> employees = employeeService.findByName(string, pageable);
-
-		model.addAttribute("page", employees);
-
-		System.out.println("==========>>>>>>>>=======>>>>> Running fine here");
-		
-		return "employees/employees-list";
-	}
+//	// @PostMapping - search
+//	@GetMapping("/search")
+//	public String search(@RequestParam("theSearchName") Optional<String> string, Model model, @PageableDefault(size = 6) Pageable pageable) {
+//		
+//		Page<Employee> employees = employeeService.findByName(string, pageable);
+//
+//		model.addAttribute("page", employees);
+//
+//		System.out.println("==========>>>>>>>>=======>>>>> Running fine here");
+//		
+//		return "employees/employees-list";
+//	}
 	
 	
 	
