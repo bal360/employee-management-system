@@ -34,6 +34,8 @@ public class EmployeeController {
 	// @GetMapping - list employees
 	@GetMapping("/index")
 	public String findAll(@PageableDefault(size = 6) Pageable pageable, Model model) {
+
+		
 //		if (name.isEmpty()) {
 			Page<Employee> page = employeeService.findAll(pageable);
 			model.addAttribute("page", page);
@@ -85,17 +87,17 @@ public class EmployeeController {
 	}
 	
 	// @PostMapping - search
-//	@PostMapping("/search")
-//	public String search(@RequestParam("theSearchName") String string, Model model, @PageableDefault(size = 6) Pageable pageable) {
-//		
-//		Page<Employee> employees = employeeService.findByName(string, pageable);
-//
-//		model.addAttribute("page", employees);
-//
-//		System.out.println("==========>>>>>>>>=======>>>>> Running fine here");
-//		
-//		return "employees/employees-list";
-//	}
+	@GetMapping("/search")
+	public String search(@RequestParam("theSearchName") Optional<String> string, Model model, @PageableDefault(size = 6) Pageable pageable) {
+		
+		Page<Employee> employees = employeeService.findByName(string, pageable);
+
+		model.addAttribute("page", employees);
+
+		System.out.println("==========>>>>>>>>=======>>>>> Running fine here");
+		
+		return "employees/employees-list";
+	}
 	
 	
 	

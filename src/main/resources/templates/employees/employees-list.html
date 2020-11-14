@@ -53,37 +53,33 @@
 				</table>
 			</div>
 				
-			<nav aria-label="...">
-				<ul class="pagination justify-content-center">
-					<!-- <li class="page-item">
-					    <span th:if="${page.hasPrevious()}">
-					        <a class="page-link" th:href="@{/employees/index(page=${page.number-1},size=${page.size})}" >
-					        	<span aria-hidden="true">&laquo</span>
-					        </a>
-					    </span>
-				    </li> -->
-				    
-				    <th:block th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}">
-			        	<li class="page-item active">
-					        <span class="page-link active" aria-current="page" th:if="${page.number == i}" th:text="${i+1}">
-					        </span>
-			             </li>
-				        <span th:unless="${page.number == i}">
-				             <a class="page-link" 
-				             	th:href="@{/employees/index(page=${i},size=${page.size})}" th:text="${i+1}">
-				             </a>
-				        </span>
-				    </th:block>
-				    
-				    <!-- <li class="page-item">
-					    <span th:if="${page.hasNext()}">
-					        <a class="page-link" th:href="@{/employees/index(page=${page.number+1},size=${page.size})}">
-					        	<span aria-hidden="true">&raquo</span>
-					        </a>
-					    </span>
-				    </li> -->
-			    </ul>
-		    </nav>
+			<div class="row">
+			
+				<div class="col-3">
+					Total Employees: [[${totalEmployees}]] - Page [[${currentPage}]] of [[${totalPages}]]
+				</div>			
+			
+				<div class="col-9 ">
+					<nav aria-label="...">
+						<ul class="pagination justify-content-center">
+							
+						    <th:block th:each="i : ${#numbers.sequence(1, totalPages)}">
+					        	<li class="page-item active">
+							        <span class="page-link active" aria-current="page" th:if="${currentPage == i}" th:text="${i}">
+							        </span>
+					             </li>
+						        <span th:unless="${i == currentPage}">
+						             <a class="page-link" 
+						             	th:href="@{'/employees/index/page/' + ${i}}" th:text="${i}">
+						             </a>
+						        </span>
+						    </th:block>
+						    
+						
+					    </ul>
+				    </nav>
+			    </div>
+			</div>
 			
 		</div>
 	</body>
