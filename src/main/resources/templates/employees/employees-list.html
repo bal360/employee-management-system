@@ -24,12 +24,10 @@
 					
 					<input type="text" placeholder="Search" name="searchTerm" th:value="${searchTerm}" required />
 					<input type="submit" class="btn btn-sm" style="color: white; background: grey" />
-					<!-- clear search button -->
-					
 				</form>
 				
 				<form action="#" th:action="@{/employees/index}" method="GET">
-					<input type="submit" class="btn btn-sm mt-1 btn-info" th:value="Clear" />
+					<input type="submit" class="btn btn-sm mt-1" style="background: black; color: white;" th:value="'Clear Search'" />
 				</form>
 			</div>
 			
@@ -74,23 +72,34 @@
 					Total Employees: [[${totalEmployees}]] - Page [[${currentPage}]] of [[${totalPages}]]
 				</div>			
 			
-				<div class="col-9 ">
+				<div class="col-9">
 					<nav aria-label="...">
-						<ul class="pagination justify-content-center">
+						<ul class="pagination justify-co">
 							
-							<li class="page-item mr-2 mt-2">
-								<a th:if="${currentPage > 1}" th:href="@{'/employees/index/page/1?sortField=' + ${sortField} + '&sortDirection=' + ${sortDirection} + ${searchTerm != null ? '&searchTerm=' + searchTerm : ''}}">First</a>
-								<span th:unless="${currentPage > 1}">First</span>
-							
-								<a th:if="${currentPage > 1}" th:href="@{'/employees/index/page/' +  ${currentPage - 1}  + '?sortField=' + ${sortField} + '&sortDirection=' + ${sortDirection} + ${searchTerm != null ? '&searchTerm=' + searchTerm : ''}}">Previous</a>
-								<span th:unless="${currentPage > 1}">Previous</span>
+							<li class="page-item">
+								<a class="page-link" th:if="${currentPage > 1}" th:href="@{'/employees/index/page/1?sortField=' + ${sortField} + '&sortDirection=' + ${sortDirection} + ${searchTerm != null ? '&searchTerm=' + searchTerm : ''}}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+</svg></a>
+								<span class="page-link" th:unless="${currentPage > 1}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+</svg></span>
+							</li>
+							<li class="page-item">
+								<a class="page-link" th:if="${currentPage > 1}" th:href="@{'/employees/index/page/' +  ${currentPage - 1}  + '?sortField=' + ${sortField} + '&sortDirection=' + ${sortDirection} + ${searchTerm != null ? '&searchTerm=' + searchTerm : ''}}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-double-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+  <path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+</svg></a>
+								<span class="page-link" th:unless="${currentPage > 1}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-double-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+  <path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+</svg></span>
 							</li>
 							
 						    <th:block th:each="i : ${#numbers.sequence(1, totalPages)}">
 					        	<li class="page-item active">
 							        <span class="page-link active" aria-current="page" th:if="${currentPage == i}" th:text="${i}">
 							        </span>
-					             </li>
+					            </li>
 						        <span th:unless="${i == currentPage}">
 						             <a class="page-link" 
 						             	th:href="@{'/employees/index/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDirection=' + ${sortDirection} + ${searchTerm != null ? '&searchTerm=' + searchTerm : ''}}" th:text="${i}">
@@ -98,12 +107,23 @@
 						        </span>
 						    </th:block>
 						    
-					    	<li class="page-item ml-2 mt-2">
-							    <a th:if="${currentPage < totalPages}" th:href="@{'/employees/index/page/' + ${currentPage + 1}  + '?sortField=' + ${sortField} + '&sortDirection=' + ${sortDirection} + ${searchTerm != null ? '&searchTerm=' + searchTerm : ''}}">Next</a>
-							    <span th:unless="${currentPage < totalPages}">Next</span>
-							
-								<a th:if="${currentPage < totalPages}" th:href="@{'/employees/index/page/' +  ${totalPages}  + '?sortField=' + ${sortField} + '&sortDirection=' + ${sortDirection} + ${searchTerm != null ? '&searchTerm=' + searchTerm : ''}}">Last</a>
-								<span th:unless="${currentPage < totalPages}">Last</span>
+					    	<li class="page-item">
+							    <a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/employees/index/page/' + ${currentPage + 1}  + '?sortField=' + ${sortField} + '&sortDirection=' + ${sortDirection} + ${searchTerm != null ? '&searchTerm=' + searchTerm : ''}}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-double-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+  <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+</svg></a>
+							    <span class="page-link" th:unless="${currentPage < totalPages}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-double-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+  <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+</svg></span>
+							</li>
+							<li>
+								<a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/employees/index/page/' +  ${totalPages}  + '?sortField=' + ${sortField} + '&sortDirection=' + ${sortDirection} + ${searchTerm != null ? '&searchTerm=' + searchTerm : ''}}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+</svg></a>
+								<span class="page-link" th:unless="${currentPage < totalPages}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+</svg></span>
 						    </li>
 						    
 						
