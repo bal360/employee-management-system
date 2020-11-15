@@ -17,12 +17,10 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 		// deleteById(int id)
 	
 	// *** query/sort methods to come ***
-//	public List<Employee> findAllByOrderByLastNameAsc();
 	
-	public Page<Employee> findAll(Pageable pageable);
+	@Query("SELECT e FROM Employee e WHERE "
+			+ "CONCAT(e.firstName, ' ', e.lastName, ' ', e.email) "
+			+ "LIKE %?1%")
+	public Page<Employee> findAll(String searchTerm, Pageable pageable);
 	
-	@Query("SELECT e FROM Employee e WHERE lower(firstName) LIKE %?1% OR lower(lastName) LIKE %?1%")
-	public Page<Employee> findByName(Optional<String> name, Pageable pageable);
-	
-//	public Page<Employee> findByLastNameOrFirstName(String string, Pageable pageable);
 }

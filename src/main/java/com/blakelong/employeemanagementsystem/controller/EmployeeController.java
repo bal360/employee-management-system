@@ -1,8 +1,12 @@
 package com.blakelong.employeemanagementsystem.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,30 +35,29 @@ public class EmployeeController {
 	// @GetMapping - list employees
 	@GetMapping("/index")
 	public String findAll(Model model) {
-		return listByPage(model, 1, "lastName", "asc");
+		String searchTerm = null;
+		return listByPage(model, 1, "lastName", "asc", searchTerm);
 	}
 	
 	@GetMapping("index/page/{pageNumber}")
 	public String listByPage(Model model, 
 							@PathVariable("pageNumber") int currentPage,
 							@Param("sortField") String sortField,
-							@Param("sortDirection") String sortDirection){
-		// get page object
-		Page<Employee> page = employeeService.findAll(currentPage, sortField, sortDirection);
-		// get total # of employees
+							@Param("sortDirection") String sortDirection,
+							@Param("searchTerm") String searchTerm) {
+
+		Page<Employee> page = employeeService.findAll(currentPage, sortField, sortDirection, searchTerm);
+
 		long totalEmployees = page.getTotalElements();
-		// get total # of pages
 		int totalPages = page.getTotalPages();
 	
-		
-		// List<Employee> listEmployees = page.getContent();
-		
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("totalEmployees", totalEmployees);
 		model.addAttribute("totalPages", totalPages);
 		model.addAttribute("sortField", sortField);
 		model.addAttribute("sortDirection", sortDirection);
 		model.addAttribute("page", page);
+		model.addAttribute("searchTerm", searchTerm);
 		
 		String reverseSortDirection = sortDirection.equals("asc") ? "desc" : "asc";
 		model.addAttribute("reverseSortDirection", reverseSortDirection);
@@ -97,7 +100,7 @@ public class EmployeeController {
 		return "redirect:/employees/index";
 	}
 	
-//	// @PostMapping - search
+	// @PostMapping - search
 //	@GetMapping("/search")
 //	public String search(@RequestParam("theSearchName") Optional<String> string, Model model, @PageableDefault(size = 6) Pageable pageable) {
 //		

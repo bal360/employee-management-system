@@ -9,16 +9,12 @@ import com.blakelong.employeemanagementsystem.entity.Employee;
 
 public interface EmployeeService {
 	
-	public Page<Employee> findAll(int pageNumber, String sortField, String sortDirection);
+	public Page<Employee> findAll(int pageNumber, String sortField, String sortDirection, String searchTerm);
 	
 	public Employee findById(int id);
 	
 	public void save(Employee employee);
 	
 	public void deleteById(int id);
-	
-//	public Page<Employee> findByLastNameOrFirstName(String name, Pageable pageable);
-	
-	public Page<Employee> findByName(Optional<String> name, Pageable pageable);
-	
+
 }
