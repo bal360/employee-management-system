@@ -1,12 +1,10 @@
 package com.blakelong.employeemanagementsystem.service;
 
-import java.util.List;
 import java.util.Optional;
-
-import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
@@ -18,16 +16,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	private EmployeeRepository employeeRepository;
 
-	private EntityManager entityManager;
-	
 	@Autowired
-	public EmployeeServiceImpl(EmployeeRepository employeeRepository, EntityManager entityManager) {
+	public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
 		this.employeeRepository = employeeRepository;
-		this.entityManager = entityManager;
 	}
 	
 	@Override
-	public Page<Employee> findAll(Pageable pageable) {
+	public Page<Employee> findAll(int pageNumber) {
+		Pageable pageable = PageRequest.of(pageNumber - 1, 5);
+		
 		return employeeRepository.findAll(pageable);
 	}
 	

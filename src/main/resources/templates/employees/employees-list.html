@@ -63,6 +63,11 @@
 					<nav aria-label="...">
 						<ul class="pagination justify-content-center">
 							
+							
+							<a th:if="${currentPage > 1}" th:href="@{'/employees/index/page/1'}">First</a>
+							
+							
+							
 						    <th:block th:each="i : ${#numbers.sequence(1, totalPages)}">
 					        	<li class="page-item active">
 							        <span class="page-link active" aria-current="page" th:if="${currentPage == i}" th:text="${i}">
