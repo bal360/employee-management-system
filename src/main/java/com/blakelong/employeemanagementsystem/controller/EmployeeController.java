@@ -1,12 +1,8 @@
 package com.blakelong.employeemanagementsystem.controller;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,24 +31,33 @@ public class EmployeeController {
 	// @GetMapping - list employees
 	@GetMapping("/index")
 	public String findAll(Model model) {
-		return listByPage(model, 1);
+		return listByPage(model, 1, "lastName", "asc");
 	}
 	
 	@GetMapping("index/page/{pageNumber}")
-	public String listByPage(Model model, @PathVariable("pageNumber") int currentPage) {
+	public String listByPage(Model model, 
+							@PathVariable("pageNumber") int currentPage,
+							@Param("sortField") String sortField,
+							@Param("sortDirection") String sortDirection){
 		// get page object
-		Page<Employee> page = employeeService.findAll(currentPage);
+		Page<Employee> page = employeeService.findAll(currentPage, sortField, sortDirection);
 		// get total # of employees
 		long totalEmployees = page.getTotalElements();
 		// get total # of pages
 		int totalPages = page.getTotalPages();
 	
+		
 		// List<Employee> listEmployees = page.getContent();
 		
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("totalEmployees", totalEmployees);
 		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDirection", sortDirection);
 		model.addAttribute("page", page);
+		
+		String reverseSortDirection = sortDirection.equals("asc") ? "desc" : "asc";
+		model.addAttribute("reverseSortDirection", reverseSortDirection);
 		
 		return "employees/employees-list";
 	}

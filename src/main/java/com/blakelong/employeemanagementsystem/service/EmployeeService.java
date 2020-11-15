@@ -9,7 +9,7 @@ import com.blakelong.employeemanagementsystem.entity.Employee;
 
 public interface EmployeeService {
 	
-	public Page<Employee> findAll(int pageNumber);
+	public Page<Employee> findAll(int pageNumber, String sortField, String sortDirection);
 	
 	public Employee findById(int id);
 	

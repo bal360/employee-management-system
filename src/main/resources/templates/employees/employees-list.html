@@ -28,7 +28,9 @@
 				<table class="table table-striped">
 					<thead class="thead-dark">
 						<tr>
-							<th>First Name</th>
+							<th>
+							<a th:href="@{'/employees/index/page/' + ${currentPage} + '?sortField=firstName&sortDirection=' + ${reverseSortDirection}}">First Name</a>
+							</th>
 							<th>Last Name</th>
 							<th>Email</th>
 							<th>Update</th>
@@ -63,10 +65,14 @@
 					<nav aria-label="...">
 						<ul class="pagination justify-content-center">
 							
-							
-							<a th:if="${currentPage > 1}" th:href="@{'/employees/index/page/1'}">First</a>
-							
-							
+							<li class="page-item">
+								<a th:if="${currentPage > 1}" th:href="@{'/employees/index/page/1'}">First</a>
+								<span th:unless="${currentPage > 1}">First</span>
+							</li>
+							<li class="page-item">	
+								<a th:if="${currentPage > 1}" th:href="@{'/employees/index/page/' +  ${currentPage - 1}}">Previous</a>
+								<span th:unless="${currentPage > 1}">Previous</span>
+							</li>
 							
 						    <th:block th:each="i : ${#numbers.sequence(1, totalPages)}">
 					        	<li class="page-item active">
@@ -75,10 +81,20 @@
 					             </li>
 						        <span th:unless="${i == currentPage}">
 						             <a class="page-link" 
-						             	th:href="@{'/employees/index/page/' + ${i}}" th:text="${i}">
+						             	th:href="@{'/employees/index/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDirection=' + ${sortDirection}}" th:text="${i}">
 						             </a>
 						        </span>
 						    </th:block>
+						    
+					    	<li class="page-item">
+							    <a th:if="${currentPage < totalPages}" th:href="@{'/employees/index/page/' + ${currentPage + 1}}">Next</a>
+							    <span th:unless="${currentPage < totalPages}">Next</span>
+							</li>
+								
+							<li class="page-item">
+								<a th:if="${currentPage < totalPages}" th:href="@{'/employees/index/page/' +  ${totalPages}}">Last</a>
+								<span th:unless="${currentPage < totalPages}">Last</span>
+						    </li>
 						    
 						
 					    </ul>

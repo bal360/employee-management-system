@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import com.blakelong.employeemanagementsystem.dao.EmployeeRepository;
@@ -22,8 +23,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 	
 	@Override
-	public Page<Employee> findAll(int pageNumber) {
-		Pageable pageable = PageRequest.of(pageNumber - 1, 5);
+	public Page<Employee> findAll(int pageNumber, String sortField, String sortDirection) {
+		Sort sort = Sort.by("lastName");
+		sort = sortDirection.equals("asc") ? sort.ascending() : sort.descending();
+				
+		Pageable pageable = PageRequest.of(pageNumber - 1, 5, sort);
 		
 		return employeeRepository.findAll(pageable);
 	}
