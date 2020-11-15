@@ -29,10 +29,14 @@
 					<thead class="thead-dark">
 						<tr>
 							<th>
-							<a th:href="@{'/employees/index/page/' + ${currentPage} + '?sortField=firstName&sortDirection=' + ${reverseSortDirection}}">First Name</a>
+								<a th:href="@{'/employees/index/page/' + ${currentPage} + '?sortField=firstName&sortDirection=' + ${reverseSortDirection}}">First Name</a>
 							</th>
-							<th>Last Name</th>
-							<th>Email</th>
+							<th>
+								<a th:href="@{'/employees/index/page/' + ${currentPage} + '?sortField=lastName&sortDirection=' + ${reverseSortDirection}}">Last Name</a>
+							</th>
+							<th>
+								<a th:href="@{'/employees/index/page/' + ${currentPage} + '?sortField=email&sortDirection=' + ${reverseSortDirection}}">Email</a>
+							</th>
 							<th>Update</th>
 							<th>Delete</th>
 						</tr>
@@ -66,11 +70,11 @@
 						<ul class="pagination justify-content-center">
 							
 							<li class="page-item">
-								<a th:if="${currentPage > 1}" th:href="@{'/employees/index/page/1'}">First</a>
+								<a th:if="${currentPage > 1}" th:href="@{'/employees/index/page/1?sortField=' + ${sortField} + '&sortDirection=' + ${sortDirection}}">First</a>
 								<span th:unless="${currentPage > 1}">First</span>
 							</li>
 							<li class="page-item">	
-								<a th:if="${currentPage > 1}" th:href="@{'/employees/index/page/' +  ${currentPage - 1}}">Previous</a>
+								<a th:if="${currentPage > 1}" th:href="@{'/employees/index/page/' +  ${currentPage - 1}  + '?sortField=' + ${sortField} + '&sortDirection=' + ${sortDirection}}">Previous</a>
 								<span th:unless="${currentPage > 1}">Previous</span>
 							</li>
 							
@@ -87,12 +91,12 @@
 						    </th:block>
 						    
 					    	<li class="page-item">
-							    <a th:if="${currentPage < totalPages}" th:href="@{'/employees/index/page/' + ${currentPage + 1}}">Next</a>
+							    <a th:if="${currentPage < totalPages}" th:href="@{'/employees/index/page/' + ${currentPage + 1}  + '?sortField=' + ${sortField} + '&sortDirection=' + ${sortDirection}}">Next</a>
 							    <span th:unless="${currentPage < totalPages}">Next</span>
 							</li>
 								
 							<li class="page-item">
-								<a th:if="${currentPage < totalPages}" th:href="@{'/employees/index/page/' +  ${totalPages}}">Last</a>
+								<a th:if="${currentPage < totalPages}" th:href="@{'/employees/index/page/' +  ${totalPages}  + '?sortField=' + ${sortField} + '&sortDirection=' + ${sortDirection}}">Last</a>
 								<span th:unless="${currentPage < totalPages}">Last</span>
 						    </li>
 						    

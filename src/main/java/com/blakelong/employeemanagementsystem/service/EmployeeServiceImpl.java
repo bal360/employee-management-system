@@ -24,7 +24,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	@Override
 	public Page<Employee> findAll(int pageNumber, String sortField, String sortDirection) {
-		Sort sort = Sort.by("lastName");
+		Sort sort = Sort.by(sortField);
 		sort = sortDirection.equals("asc") ? sort.ascending() : sort.descending();
 				
 		Pageable pageable = PageRequest.of(pageNumber - 1, 5, sort);
