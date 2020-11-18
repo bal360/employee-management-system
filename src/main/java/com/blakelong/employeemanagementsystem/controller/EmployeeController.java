@@ -100,19 +100,4 @@ public class EmployeeController {
 		return "redirect:/employees/index";
 	}
 	
-	// @PostMapping - search
-//	@GetMapping("/search")
-//	public String search(@RequestParam("theSearchName") Optional<String> string, Model model, @PageableDefault(size = 6) Pageable pageable) {
-//		
-//		Page<Employee> employees = employeeService.findByName(string, pageable);
-//
-//		model.addAttribute("page", employees);
-//
-//		System.out.println("==========>>>>>>>>=======>>>>> Running fine here");
-//		
-//		return "employees/employees-list";
-//	}
-	
-	
-	
 }
