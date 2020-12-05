@@ -25,11 +25,11 @@
 					<input type="hidden" name="sortDirection" th:value="${sortDirection}" />
 					
 					<input type="text" placeholder="Search" name="searchTerm" th:value="${searchTerm}" required />
-					<input type="submit" value="Submit" class="btn btn-sm" style="color: white; background: grey" />
+					<input type="submit" value="Submit" class="btn btn-sm btn-secondary" />
 				</form>
 				
 				<form action="#" th:action="@{/employees/index}" method="GET">
-					<input type="submit" class="btn btn-sm mt-1" style="background: black; color: white;" th:value="'Clear Search'" />
+					<input type="submit" class="btn btn-sm btn-outline-dark mt-1" th:value="'Clear Search'" />
 				</form>
 			</div>
 			
@@ -141,7 +141,7 @@
 							  	</span>
 							</li>
 							
-							<li>
+							<li class="page-item">
 								<a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/employees/index/page/' +  ${totalPages}  + '?sortField=' + ${sortField} + '&sortDirection=' + ${sortDirection} + ${searchTerm != null ? '&searchTerm=' + searchTerm : ''}}">
 									Last
 								</a>
