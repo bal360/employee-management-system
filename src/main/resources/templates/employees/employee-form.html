@@ -20,16 +20,16 @@
 			<div class="row justify-content-center form-group">	
 				<form action="#" th:action="@{/employees/save}" method="POST" th:object="${employee}">
 					
-					<input type="hidden" id="hidden" th:field="${employee.id}" >
+					<input type="hidden" id="hidden" th:field="${employee.id}">
 					
 					<label for="firstName">First Name</label>
-					<input type="text" class="form-control mb-4" id="firstName" th:field="*{firstName}">
+					<input type="text" class="form-control mb-4" id="firstName" th:field="*{firstName}" required>
 					
 					<label for="lastName">Last Name</label>
-					<input type="text" class="form-control mb-4" id="lastName" th:field="*{lastName}" >
+					<input type="text" class="form-control mb-4" id="lastName" th:field="*{lastName}" required>
 					
 					<label for="email">Email</label>
-					<input type="text" class="form-control mb-4" id="email" th:field="*{email}">
+					<input type="text" class="form-control mb-4" id="email" th:field="*{email}" required>
 					
 					<button type="submit" class="btn btn-info mb-4 text-center">Save</button>
 					
